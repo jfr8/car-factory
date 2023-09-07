@@ -1,17 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <span v-if="carList.length === 0 || !carList.length"> No cars found</span>
+    <ul v-else>
+      <li v-for="car in carList" :key="car._id">
+        {{ car.brand }} - {{ car.model }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  data() {
+    return {
+      apiURL: "https://front-end-test-back-end.up.railway.app/api/cars",
+      carList: [],
+    };
+  },
+
+  created() {
+    this.getCarListFromApi();
+  },
+
+  methods: {
+    async getCarListFromApi() {
+      const response = await fetch(this.apiURL);
+      const data = await response.json();
+      this.carList = data;
+    },
+  },
+};
 </script>
 
 <style>
