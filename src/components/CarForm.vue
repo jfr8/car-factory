@@ -56,6 +56,14 @@
           v-model="formData.isNew"
           placeholder="Add isNew"
       /></label>
+      <label for="isEV" class="label"
+        >Is Car EV:
+        <input
+          id="isEV"
+          type="checkbox"
+          v-model="formData.isEV"
+          placeholder="Add isEV"
+      /></label>
 
       <button
         class="button is-primary"
@@ -94,6 +102,7 @@ export default {
         color: "",
         mpg: null,
         isNew: true,
+        isEV: false
       },
     };
   },
@@ -110,6 +119,7 @@ export default {
       this.formData.color = value.color;
       this.formData.mpg = value.mpg;
       this.formData.isNew = value.isNew;
+      this.formData.isEV = value.isEV;
     },
   },
 

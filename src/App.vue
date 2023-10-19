@@ -24,7 +24,7 @@
       <ul v-else>
         <li class="m-0 p-0" v-for="car in carList" :key="car._id">
           {{ car.brand }} - {{ car.model }} - {{ car.year }} - {{ car.color }} -
-          {{ car.mpg }} - {{ car.isnew ? "new car" : "used car" }}
+          {{ car.mpg }} - {{ car.isnew ? "new car" : "used car" }} - {{ car.isEV ? "is EV" : "not EV" }}
           <button
             class="button is-warning is-light button is-small"
             @click="editCar(car)"
@@ -65,6 +65,7 @@ export default {
       carList: [],
       mode: "creating",
       apiURL: "https://front-end-test-back-end.up.railway.app/api/cars/",
+      //apiURL: "http://localhost:3000/api/cars"
     };
   },
 
@@ -114,6 +115,7 @@ export default {
         console.log("testing if this triggers");
         await fetch(
           "https://front-end-test-back-end.up.railway.app/api/cars/" +
+          //"http://localhost:3000/api/cars/" +
             this.selectedCar._id,
             // this.selectedCar._id refers to the id (starting point) doesnt change
           {
@@ -149,6 +151,7 @@ export default {
       try {
         fetch(
           "https://front-end-test-back-end.up.railway.app/api/cars/" + carId,
+          //"http://localhost:3000/api/cars/" + carId,
           {
             method: "delete",
             mode: "cors",
