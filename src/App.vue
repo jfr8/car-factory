@@ -2,64 +2,57 @@
   <div id="wrapper">
     <h1 class="title">Car Factory</h1>
 
+    <p>
+      <!-- use the router-link component for navigation. -->
+      <!-- specify the link by passing the `to` prop. -->
+      <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
+      <button class="button is-primary">
+        <router-link to="/">Home</router-link>
+      </button><br><br>
+      <button class="button is-primary">
+        <router-link to="/create">Create</router-link>
+      </button><br><br>
+      <button class="button is-primary">
+        <router-link to="/carlist">Car List</router-link>
+      </button>
+    </p>
+    <!-- route outlet -->
+    <!-- component matched by the route will render here -->
+    <router-view></router-view>
+
     <!-- @ recieves the data (emit), :send the data(prop)-->
-    <CarForm
+    <!-- <CarForm
       :edited-car-data="selectedCar"
       :mode="mode"
       @new-car-emitted="createNewCar($event)"
       @update-car-emitted="updateCar($event)"
-    ></CarForm>
+    ></CarForm> -->
 
     <div v-if="showAlert" class="notification is-danger">
       <button @click="removeAlert" class="delete"></button>
       <span>Unable to retrieve data!! Check API connection, Try again..</span>
     </div>
 
-    <div id="box">
-      <span class="subtitle has-text-primary-dark" v-if="carList.length > 0"
-        >Here are the available cars:
-      </span>
 
-      <span v-if="carList.length === 0 || !carList.length"> No cars found</span>
-      <ul v-else>
-        <li class="m-0 p-0" v-for="car in carList" :key="car._id">
-          {{ car.brand }} - {{ car.model }} - {{ car.year }} - {{ car.color }} -
-          {{ car.mpg }} - {{ car.isnew ? "new car" : "used car" }} - {{ car.isEV ? "is EV" : "not EV" }}
-          <button
-            class="button is-warning is-light button is-small"
-            @click="editCar(car)"
-          >
-            edit
-          </button>
-          <button
-            class="button is-danger is-light button is-small"
-            @click="deleteCar(car._id)"
-          >
-            remove
-          </button>
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 
 <script>
 // @ts-check
 
-import CarForm from "./components/CarForm.vue";
+//import CarForm from "./components/CarForm.vue";
 
 export default {
   components: {
-    CarForm: CarForm,
+    //CarForm: CarForm,
   },
   name: "App",
 
   // Gotta review the leak about emits not being declared
-  
 
   data() {
     return {
-      // selectedCar is set to null so it can be use on the prop name 
+      // selectedCar is set to null so it can be use on the prop name
       showAlert: false,
       selectedCar: null,
       carList: [],
@@ -71,53 +64,53 @@ export default {
 
   // try catch, add alerts, error handling
   // components
-  created() {
-    this.getCarListFromApi();
-  },
+  // created() {
+  //   this.getCarListFromApi();
+  // },
   methods: {
-    async createNewCar(newCarObj) {
-      //create carObject
-      console.log(newCarObj);
+    // async createNewCar(newCarObj) {
+    //   //create carObject
+    //   console.log(newCarObj);
 
-      try {
-        const response = await fetch(this.apiURL, {
-          method: "POST",
-          mode: "cors",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newCarObj),
-        });
+    //   try {
+    //     const response = await fetch(this.apiURL, {
+    //       method: "POST",
+    //       mode: "cors",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(newCarObj),
+    //     });
 
-        console.log("Here is response", response);
-        // fetch post form  to api
-        this.getCarListFromApi();
-      } catch (err) {
-        console.log("errorrrrr");
-      }
-    },
+    //     console.log("Here is response", response);
+    //     // fetch post form  to api
+    //     this.getCarListFromApi();
+    //   } catch (err) {
+    //     console.log("errorrrrr");
+    //   }
+    // },
 
-    async getCarListFromApi() {
-      try {
-        console.log(this.apiURL);
-        const response = await fetch(this.apiURL);
-        console.log("responseeee", response);
-        const data = await response.json();
-        this.carList = data;
-      } catch (error) {
-        console.log("errorrr", error);
-        this.showAlert = true;
-      }
-    },
+    // async getCarListFromApi() {
+    //   try {
+    //     console.log(this.apiURL);
+    //     const response = await fetch(this.apiURL);
+    //     console.log("responseeee", response);
+    //     const data = await response.json();
+    //     this.carList = data;
+    //   } catch (error) {
+    //     console.log("errorrr", error);
+    //     this.showAlert = true;
+    //   }
+    // },
 
     async updateCar(updatedCarObj) {
       try {
         console.log("testing if this triggers");
         await fetch(
           "https://front-end-test-back-end.up.railway.app/api/cars/" +
-          //"http://localhost:3000/api/cars/" +
+            //"http://localhost:3000/api/cars/" +
             this.selectedCar._id,
-            // this.selectedCar._id refers to the id (starting point) doesnt change
+          // this.selectedCar._id refers to the id (starting point) doesnt change
           {
             method: "put",
             mode: "cors",
@@ -126,10 +119,9 @@ export default {
             },
             body: JSON.stringify(updatedCarObj),
           }
-          
         );
 
-        console.log(this.selectedCar)
+        console.log(this.selectedCar);
         console.log("testing if this triggers after");
 
         this.getCarListFromApi();
