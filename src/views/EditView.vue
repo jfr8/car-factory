@@ -38,8 +38,6 @@ export default {
 
       const data = await response.json();
 
-      console.log(data);
-
       this.selectedCar = data;
     },
 
@@ -60,9 +58,6 @@ export default {
             body: JSON.stringify(updatedCarObj),
           }
         );
-
-        console.log(this.selectedCar);
-        console.log("testing if this triggers after");
 
         this.selectedCar = null;
         this.$router.go(-1);
