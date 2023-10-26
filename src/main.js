@@ -4,6 +4,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
 import Home from './views/HomeView.vue'
 import Create from './views/CreateView.vue'
+import Edit from './views/EditView.vue'
 import CarList from './views/CarList.vue'
 // 1. Define route components.
 // These can be imported from other files
@@ -15,6 +16,7 @@ import CarList from './views/CarList.vue'
 const routes = [
   { path: '/', component: Home },
   { path: '/create', component: Create },
+  { path: '/edit/:id', component: Edit },
   { path: '/carlist', component: CarList}
 ]
 

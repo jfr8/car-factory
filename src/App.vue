@@ -7,11 +7,11 @@
       <!-- specify the link by passing the `to` prop. -->
       <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
       <button class="button is-primary">
-        <router-link to="/">Home</router-link>
-      </button><br><br>
+        <router-link to="/">Home</router-link></button
+      ><br /><br />
       <button class="button is-primary">
-        <router-link to="/create">Create</router-link>
-      </button><br><br>
+        <router-link to="/create">Create</router-link></button
+      ><br /><br />
       <button class="button is-primary">
         <router-link to="/carlist">Car List</router-link>
       </button>
@@ -32,23 +32,14 @@
       <button @click="removeAlert" class="delete"></button>
       <span>Unable to retrieve data!! Check API connection, Try again..</span>
     </div>
-
-
   </div>
 </template>
 
 <script>
 // @ts-check
 
-//import CarForm from "./components/CarForm.vue";
-
 export default {
-  components: {
-    //CarForm: CarForm,
-  },
   name: "App",
-
-  // Gotta review the leak about emits not being declared
 
   data() {
     return {
@@ -62,78 +53,7 @@ export default {
     };
   },
 
-  // try catch, add alerts, error handling
-  // components
-  // created() {
-  //   this.getCarListFromApi();
-  // },
   methods: {
-    // async createNewCar(newCarObj) {
-    //   //create carObject
-    //   console.log(newCarObj);
-
-    //   try {
-    //     const response = await fetch(this.apiURL, {
-    //       method: "POST",
-    //       mode: "cors",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(newCarObj),
-    //     });
-
-    //     console.log("Here is response", response);
-    //     // fetch post form  to api
-    //     this.getCarListFromApi();
-    //   } catch (err) {
-    //     console.log("errorrrrr");
-    //   }
-    // },
-
-    // async getCarListFromApi() {
-    //   try {
-    //     console.log(this.apiURL);
-    //     const response = await fetch(this.apiURL);
-    //     console.log("responseeee", response);
-    //     const data = await response.json();
-    //     this.carList = data;
-    //   } catch (error) {
-    //     console.log("errorrr", error);
-    //     this.showAlert = true;
-    //   }
-    // },
-
-    async updateCar(updatedCarObj) {
-      try {
-        console.log("testing if this triggers");
-        await fetch(
-          "https://front-end-test-back-end.up.railway.app/api/cars/" +
-            //"http://localhost:3000/api/cars/" +
-            this.selectedCar._id,
-          // this.selectedCar._id refers to the id (starting point) doesnt change
-          {
-            method: "put",
-            mode: "cors",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedCarObj),
-          }
-        );
-
-        console.log(this.selectedCar);
-        console.log("testing if this triggers after");
-
-        this.getCarListFromApi();
-        //this.resetForm();
-      } catch (error) {
-        console.log("Unable to update car!", error);
-      }
-
-      this.selectedCar = null;
-      this.mode = "creating";
-    },
-
     removeAlert() {
       console.log("testingnnnnnn");
       this.showAlert = false;

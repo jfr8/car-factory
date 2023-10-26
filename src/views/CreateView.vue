@@ -27,8 +27,6 @@ export default {
 
   methods: {
     async createNewCar(newCarObj) {
-      //create carObject
-      console.log(newCarObj);
 
       try {
         const response = await fetch(this.apiURL, {
@@ -41,8 +39,10 @@ export default {
         });
 
         console.log("Here is response", response);
+        this.$router.push('/')
+
       } catch (err) {
-        console.log("errorrrrr");
+        console.error("errorrrrr: ", err);
       }
     },
   },

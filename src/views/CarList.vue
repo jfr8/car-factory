@@ -76,9 +76,10 @@ export default {
     },
 
     editCar(car) {
-      this.mode = "edit";
-      console.log(car);
-      this.selectedCar = car;
+      // this.mode = "edit";
+      // console.log(car);
+      // this.selectedCar = car;
+      this.$router.push(`/edit/${car._id}`)
     },
   },
 };
