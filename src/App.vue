@@ -1,21 +1,6 @@
 <template>
   <div id="wrapper">
-    <h1 class="title">Car Factory</h1>
-
-    <p>
-      <!-- use the router-link component for navigation. -->
-      <!-- specify the link by passing the `to` prop. -->
-      <!-- `<router-link>` will render an `<a>` tag with the correct `href` attribute -->
-      <button class="button is-primary">
-        <router-link to="/">Home</router-link></button
-      ><br /><br />
-      <button class="button is-primary">
-        <router-link to="/create">Create</router-link></button
-      ><br /><br />
-      <button class="button is-primary">
-        <router-link to="/carlist">Car List</router-link>
-      </button>
-    </p>
+    <TheNavigationBar/>
     <!-- route outlet -->
     <!-- component matched by the route will render here -->
     <router-view></router-view>
@@ -36,10 +21,17 @@
 </template>
 
 <script>
+import TheNavigationBar from './components/TheNavigationBar';
 // @ts-check
+
 
 export default {
   name: "App",
+  components: {
+    TheNavigationBar
+  },
+
+
 
   data() {
     return {
